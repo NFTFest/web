@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="ICL.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Stories de Instagram</title>
+
+    <style>
+        body {
+            padding: 10px;
+            height: 100vh;
+            background-color: #F1F4F8;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .story-container {
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+        }
+
+        .story-bubble {
+            width: 60px;
+            height: 60px;
+            margin: 0 5px;
+            background: linear-gradient(135deg, #feda75 0%, #fa7e1e 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: moveGradient 3s linear infinite alternate;
+            position: relative; /* Para posicionar el texto encima */
+        }
+
+        .story-bubble p {
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            padding: 0;
+            font-size: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        @keyframes moveGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .story-bubble img {
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+        }
+
+        .expanded-story {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+        }
+
+        .expanded-story img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .ventajas-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px auto;
+        }
+
+        .ventaja {
+            text-align: center;
+            width: calc(16.666% - 20px);
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .ventaja i {
+            width: 50px;
+            color: #FFCD00;
+        }
+
+        .ventaja p {
+            margin-top: 10px;
+        }
+        @media (max-width: 500px) {
+            .ventaja p {
+                display: none;
+            }
+        
+            .ventaja {
+                border-radius: 30px;
+            }
+            .ventaja i {
+                width: 30px;
+            }
+        }
+        
+        .reserva-section {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid #CAD3E7;
+
+        }
+
+        .reserva-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+
+        .reserva-option {
+            text-align: center;
+            width: 50%;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+            border: 3px solid #EAEAEA;
+           webkit-filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.1));
+            cursor:pointer;
+        }
+    
+        .pago-option {
+            text-align: center;
+    padding: 20px;
+    margin: 10px 10px auto;
+    transition: background-color 0.3s;
+    border: 3px solid #EAEAEA;
+    webkit-filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0px 1px 5px rgba(0, 0, 0, 0.1));
+        }
+
+        .pago-option img {
+            width: 60px;
+        }
+       
+
+        .reserva-option h3 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .reserva-option img {
+            width: 60px;
+        }
+
+          .reserva-option.active {
+            border: 3px solid #66CD54;
+        }
+
+        .oferta{
+            padding: 18px;
+            border: 1px solid #f8c75a;
+            background: #fbf8e5;
+            margin: 20px;
+        }
+
+        
+
+       .upsell-container {
+            position: relative;
+            display: inline-block;
+        }
+
+
+        .upsell img {
+            animation-direction: alternate;
+            animation-duration: 0.5s;
+            animation-name: move;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .upsell span {
+            font-size: 14px;
+            line-height: 1.3;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateY(-50%);
+            }
+            100% {
+                transform: translateY(-50%) translateX(10px);
+            }
+        }
+
+        .reviews-section {
+            text-align: center;
+            padding: 40px 0;
+            overflow: hidden;
+        }
+
+        .review-container {
+               display: flex;
+    width: max-content;
+    animation: moverEjemplos 100s linear infinite;
+        }
+
+ @keyframes moverEjemplos {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+
+        .review {
+            width: 300px;
+            padding: 20px;
+           background: #FDFCE8;
+    border: 1px solid #D6D6D6;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 20px;
+        }
+
+        @keyframes scrollReviews {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.container h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.container label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.container input {
+    padding: 10px;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+}
+
+#card-element {
+    padding: 10px;
+    border: 1px solid #EAEAEA;
+    border-radius: 5px;
+}
+
+#continuar {
+    background-color: #66CD54;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#continuar:hover {
+    background-color: #4CAF50;
+}
+#continuar2 {
+    background-color: #66CD54;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+width: 90%;
+}
+
+#continuar2:hover {
+    background-color: #4CAF50;
+}
+
+
+#submit-button {
+    background-color: #66CD54;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+#submit-button:hover {
+    background-color: #4CAF50;
+}
+
+        .top-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+            z-index: 3;
+}
+
+.top-section h2 {
+    font-size: 18px;
+    margin: 0;
+    text-align: center;
+}
+
+#ofertaTickets {
+    font-weight: bold;
+    color: #E68B00;
+}
+
+.progress-bar-container {
+    width: 90%;
+    height: 15px;
+    background-color: #EAEAEA;
+    margin: auto;
+    position: relative;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #E68B00;
+    width: 50%;
+    border-radius: 30px;
+    transition: width 0.3s;
+}
+
+.historias{
+    padding: 5px;
+}
+        .historias h3{
+    text-align:center;
+}
+
+    .desplegable {
+  border: 1px solid #ccc;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.encabezado {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.encabezado i {
+  font-size: 18px;
+}
+
+.contenido {
+  margin-top: 10px;
+}
+
+.contenedor-productos {
+  /* Estilos para el contenido de productos */
+}
+
+.descuento {
+  margin-top: 20px;
+}
+
+.descuento input[type="text"] {
+  width: 200px;
+  padding: 5px;
+  border: 1px solid #ccc;
+}
+
+button.aplicar-descuento {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button.aplicar-descuento:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el subtotal */
+.subtotal {
+  margin-top: 20px;
+}
+
+.subtotal p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.subtotal-amount {
+  font-weight: bold;
+  margin: 5px;
+}
+
+.iva {
+  font-size: 12px;
+  color: gray;
+}
+
+.envio {
+  color: green;
+  font-weight: bold;
+}
+
+.regalo{
+    display:flex;
+    justify-content: center;
+        align-items: center;
+}
+
+.regalo img{
+    width: 65px;
+    border-radius: 30px;
+    animation: none;
+    margin: 3px;
+}
+
+        /* Estilo para el contenedor de productos */
+.contenedor-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre los productos */
+}
+
+/* Estilo para cada producto individual */
+.producto {
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.producto .talla{
+font-weight: bold;
+    margin: 10px;
+}
+
+/* Estilo para la imagen del producto */
+.imagenResumen {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.imagenResumen img {
+      height: auto;
+    width: 50px;
+}
+
+/* Estilo para la cantidad en la imagen */
+.imagenResumen span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ffcd00;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+/* Estilo para el nombre del producto */
+.nombreproducto {
+  font-weight: bold;
+}
+
+/* Estilo para el precio del producto */
+.precio {
+  font-size: 16px;
+  color: #333;
+}
+
+
+/*.progress-bar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #FFC87C;
+    border-radius: 30px;
+}*/
+
+.footer-garantias {
+    margin-top: 20px;
+}
+
+/* Estilos para la sección de métodos de pago */
+.footer-pagos {
+    margin-top: 20px;
+}
+
+/* Estilos para los logos de métodos de pago */
+.footer-pagos img {
+    margin-right: 10px;
+        width: 100%;
+}
+
+
+
+/* Estilo básico para los íconos de pago */
+.icon--payment {
+  display: inline-block;
+  margin-right: 10px; /* Espacio entre los íconos */
+  width: 40px; /* Ancho del ícono */
+  height: 24px; /* Alto del ícono */
+}
+
+/* Cambiar el color de relleno de los íconos */
+.icon--payment svg {
+  fill: #333; /* Cambia el color a tu preferencia */
+}
+
+/* Cambiar el color de fondo al pasar el mouse por encima */
+.icon--payment:hover {
+  background-color: #f0f0f0; /* Cambia el color a tu preferencia */
+}
+
+@keyframes parpadeo-naranja {
+  0% {
+    background-color: transparent;
+    color: inherit;
+  }
+  50% {
+    background-color: orange;
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+  100% {
+    background-color: transparent;
+    color: inherit;
+  }
+}
+
+.parpadeo-naranja {
+  animation: parpadeo-naranja 2s;
+}
+
+/* Estilo predeterminado para .ventaja */
+.ventaja {
+  border: 1px solid #000; /* Cambia esto al estilo de borde predeterminado */
+}
+
+/* Estilo cuando #info está en display: block */
+#info[style*="block"] .ventaja {
+  border: 1px solid orange;
+}
+
+/* Estilo cuando #mejoraPedido está en display: block */
+#mejoraPedido[style*="block"] .ventaja {
+  border: 1px solid orange;
+}
+
+/* Estilo cuando #stripe está en display: block */
+#stripe[style*="block"] .ventaja {
+  border: 1px solid orange;
+}
+
+
+    </style>
+<script src="https://js.stripe.com/v3"></script>
+</head>
+<body>
+    <div class="top-section" id="topsection" style="display: none">
+    <h2>Sólo quedan <span id="ofertaTickets">25</span> unidades</h2>
+    <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+</div>
+</div>
+     <div class="historias">
+         <h3>Últimas Reviews Stories</h3>
+    <div class="story-container">
+        <div class="story-bubble" data-image="reviewsall.png">
+            <img src="reviewsall.png">
+        </div>
+        <div class="story-bubble" data-image="reviewsall2.png">
+            <img src="reviewsall2.png">
+        </div>
+        <div class="story-bubble" data-image="reviewsall3.png">
+            <img src="reviewsall3.png">
+        </div>
+        <div class="story-bubble" data-image="reviewsall4.png">
+            <img src="reviewsall4.png">
+        </div>
+    </div>
+
+</div>
+    <div class="expanded-story">
+        <img src="app.png">
+    </div>
+<div class="ventajas-container">
+    <div class="ventaja">
+       <i class="fas fa-info-circle"></i>
+        <p>Información de Envío</p>
+    </div>
+    <div class="ventaja">
+        <i class="fas fa-box"></i>
+        <p>Mejora Tu Pedido</p>
+    </div>
+    <div class="ventaja">
+       <i class="fas fa-credit-card"></i>
+        <p>Método de Pago</p>
+    </div>
+    <div class="ventaja">
+           <i class="fas fa-check"></i>
+        <p>Completado</p>
+    </div>
+</div>
+
+<section class="reserva-section">
+       <div class="desplegable">
+              <div class="encabezado">
+                <p>Mostrar resumen del pedido</p>
+                <span class="total"></span>
+                <i class="fas fa-arrow-down"></i>
+                
+              </div>
+              <div class="box-contenido" style="display:none;">
+                <div class="contenido" >
+                <div class="contenedor-productos"></div>
+              </div>
+              <div class="descuento">
+                <input type="text" placeholder="Ingresa el código de descuento">
+                <button class="aplicar-descuento">Aplicar Descuento</button>
+              </div>
+           <div class="subtotal">
+              <p>Subtotal: <span class="subtotal-amount">0€</span></p>
+              <small class="iva">IVA incluido</small>
+              <p>Envío: <span class="envio"></span></p>
+            </div>
+              </div>
+     </div>
+
+
+<div class="container" id="info">
+  <h2>Información de Contacto</h2>
+  <form id="info-form">
+    <label for="name">Nombre Completo</label>
+    <input type="text" id="name" required placeholder="Nombre y Apellidos">
+
+    <label for="email">Correo Electrónico</label>
+    <input type="email" id="email" required placeholder="Email Principal">
+
+    <label for="phone">Número de Teléfono</label>
+    <input type="tel" id="phone" required placeholder="Teléfono">
+
+    <label for="address">Dirección Completa</label>
+    <input type="text" id="address" required placeholder="Calle , Bloque, Portal , Piso, Nº , Escalera, Puerta">
+
+    <label for="city">Ciudad</label>
+    <input type="text" id="city" required placeholder="Ejemplo: Madrid">
+
+    <label for="province">Provincia</label>
+    <input type="text" id="province" required placeholder="Ejemplo Madrid">
+
+    <label for="postal-code">Código Postal</label>
+    <input type="text" id="postal-code" required placeholder="Ejemplo: 28033">
+
+    <button id="continuar">Continuar</button>
+  </form>
+</div>
+
+     
+    <div class="reserva" id="mejoraPedido" style="display:none">
+                 <div class="reserva-options reserva-container" > </div>
+                 <div class="oferta">
+                    <div class="upsell-container">
+                    <div class="upsell">
+                        <img  src="arrow.png" width="25"><input type="checkbox"><span>Sí, quiero enviarlo con el Kit para Regalo</span>
+                        <p>Caja Regalo + Etiquetas de Cartón +  Dedicatoria por tan sólo <span style="font-weight: bolder;">10€ extra</span></span></p>
+                        <div class="regalo">
+                            <img src="regalo2.png">
+                            <img src="regalo3.png">
+                            <img src="regalo4.png">
+                        <div>
+                    </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <button id="continuar2">Continuar</button>
+  </div>
+        <div class="container" id="stripe" style="display:none">
+              <h2>Forma de Pago</h2>
+              <form id="payment-form">
+                <label for="name">Nombre y Apellidos</label>
+                <input type="text" id="name" required>
+                <div id="card-element">
+                  <!-- Unidad de formulario de Stripe -->
+                </div>
+                <div id="payment-result" style="display:none">
+                  <p>El pago se ha realizado con éxito.</p>
+                </div>
+                  <div id="payment-error" style="display: none;">
+                  <p>Hubo un error en el proceso de pago. Por favor, inténtalo nuevamente.</p>
+                </div>
+                <button id="submit-button">Realizar Pago</button>
+
+                   <div class="footer-garantias">
+               <ul class="inline-list payment-icons footer__section"><li class="icon--payment">
+              <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-american_express"><title id="pi-american_express">American Express</title><g fill="none"><path fill="#000" d="M35,0 L3,0 C1.3,0 0,1.3 0,3 L0,21 C0,22.7 1.4,24 3,24 L35,24 C36.7,24 38,22.7 38,21 L38,3 C38,1.3 36.6,0 35,0 Z" opacity=".07"></path><path fill="#006FCF" d="M35,1 C36.1,1 37,1.9 37,3 L37,21 C37,22.1 36.1,23 35,23 L3,23 C1.9,23 1,22.1 1,21 L1,3 C1,1.9 1.9,1 3,1 L35,1"></path><path fill="#FFF" d="M8.971,10.268 L9.745,12.144 L8.203,12.144 L8.971,10.268 Z M25.046,10.346 L22.069,10.346 L22.069,11.173 L24.998,11.173 L24.998,12.412 L22.075,12.412 L22.075,13.334 L25.052,13.334 L25.052,14.073 L27.129,11.828 L25.052,9.488 L25.046,10.346 L25.046,10.346 Z M10.983,8.006 L14.978,8.006 L15.865,9.941 L16.687,8 L27.057,8 L28.135,9.19 L29.25,8 L34.013,8 L30.494,11.852 L33.977,15.68 L29.143,15.68 L28.065,14.49 L26.94,15.68 L10.03,15.68 L9.536,14.49 L8.406,14.49 L7.911,15.68 L4,15.68 L7.286,8 L10.716,8 L10.983,8.006 Z M19.646,9.084 L17.407,9.084 L15.907,12.62 L14.282,9.084 L12.06,9.084 L12.06,13.894 L10,9.084 L8.007,9.084 L5.625,14.596 L7.18,14.596 L7.674,13.406 L10.27,13.406 L10.764,14.596 L13.484,14.596 L13.484,10.661 L15.235,14.602 L16.425,14.602 L18.165,10.673 L18.165,14.603 L19.623,14.603 L19.647,9.083 L19.646,9.084 Z M28.986,11.852 L31.517,9.084 L29.695,9.084 L28.094,10.81 L26.546,9.084 L20.652,9.084 L20.652,14.602 L26.462,14.602 L28.076,12.864 L29.624,14.602 L31.499,14.602 L28.987,11.852 L28.986,11.852 Z"></path></g></svg>
+
+            </li><li class="icon--payment">
+              <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-maestro"><title id="pi-maestro">Maestro</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><circle fill="#EB001B" cx="15" cy="12" r="7"></circle><circle fill="#00A2E5" cx="23" cy="12" r="7"></circle><path fill="#7375CF" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"></path></svg>
+            </li><li class="icon--payment">
+              <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><circle fill="#EB001B" cx="15" cy="12" r="7"></circle><circle fill="#F79E1B" cx="23" cy="12" r="7"></circle><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"></path></svg>
+            </li><li class="icon--payment">
+              <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-paypal"><title id="pi-paypal">PayPal</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"></path><path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z"></path><path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z"></path></svg>
+            </li><li class="icon--payment">
+              <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-shopify_pay"><title id="pi-shopify_pay">Shop Pay</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32z" fill="#5A31F4"></path><path d="M21.382 9.713c0 1.668-1.177 2.858-2.821 2.858h-1.549a.133.133 0 00-.12.08.127.127 0 00-.01.049v2.192a.129.129 0 01-.13.129h-1.084a.13.13 0 01-.13-.13V6.986a.127.127 0 01.08-.12.129.129 0 01.05-.01h2.9c1.637 0 2.814 1.19 2.814 2.858v-.001zm-1.352 0c0-.958-.658-1.658-1.55-1.658h-1.468a.13.13 0 00-.13.13v3.05a.127.127 0 00.038.092.129.129 0 00.092.038h1.468c.892.005 1.55-.695 1.55-1.652zm1.674 3.791a1.527 1.527 0 01.647-1.317c.423-.316 1.084-.48 2.055-.514l1.033-.036v-.303c0-.607-.41-.863-1.068-.863-.658 0-1.075.231-1.17.61a.127.127 0 01-.125.09h-1.022a.13.13 0 01-.126-.092.125.125 0 01-.004-.055c.152-.898.904-1.58 2.494-1.58 1.692 0 2.303.783 2.303 2.276v3.172a.13.13 0 01-.132.129h-1.03a.13.13 0 01-.13-.13v-.236a.096.096 0 00-.061-.091.1.1 0 00-.107.022c-.31.334-.808.575-1.607.575-1.175 0-1.95-.607-1.95-1.657zm3.735-.687v-.246l-1.339.07c-.705.036-1.115.326-1.115.816 0 .444.376.69 1.034.69.893 0 1.42-.48 1.42-1.33zm2.316 4.6v-.919a.13.13 0 01.049-.1.132.132 0 01.108-.027c.158.029.318.044.479.044a1.229 1.229 0 001.245-.876l.067-.211a.133.133 0 000-.088l-2.145-5.471a.13.13 0 01.06-.165.13.13 0 01.062-.015h1.04a.132.132 0 01.123.085l1.456 3.859a.131.131 0 00.125.088.133.133 0 00.125-.088l1.265-3.848a.13.13 0 01.126-.09h1.076a.134.134 0 01.132.116.134.134 0 01-.008.063l-2.295 6.076c-.528 1.413-1.433 1.773-2.43 1.773a1.959 1.959 0 01-.561-.066.132.132 0 01-.1-.14h.001zM8.57 6.4a5.363 5.363 0 00-3.683 1.427.231.231 0 00-.029.31l.618.839a.236.236 0 00.362.028 3.823 3.823 0 012.738-1.11c2.12 0 3.227 1.584 3.227 3.15 0 1.7-1.163 2.898-2.835 2.921-1.292 0-2.266-.85-2.266-1.974a1.908 1.908 0 01.713-1.48.231.231 0 00.033-.324l-.65-.815a.236.236 0 00-.339-.034 3.43 3.43 0 00-.942 1.183 3.39 3.39 0 00-.337 1.47c0 1.935 1.655 3.452 3.775 3.464h.03c2.517-.032 4.337-1.884 4.337-4.415 0-2.247-1.667-4.64-4.752-4.64z" fill="#fff"></path></svg>
+            </li><li class="icon--payment">
+              <svg viewBox="-36 25 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-unionpay"><title id="pi-unionpay">Union Pay</title><path fill="#005B9A" d="M-36 46.8v.7-.7zM-18.3 25v24h-7.2c-1.3 0-2.1-1-1.8-2.3l4.4-19.4c.3-1.3 1.9-2.3 3.2-2.3h1.4zm12.6 0c-1.3 0-2.9 1-3.2 2.3l-4.5 19.4c-.3 1.3.5 2.3 1.8 2.3h-4.9V25h10.8z"></path><path fill="#E9292D" d="M-19.7 25c-1.3 0-2.9 1.1-3.2 2.3l-4.4 19.4c-.3 1.3.5 2.3 1.8 2.3h-8.9c-.8 0-1.5-.6-1.5-1.4v-21c0-.8.7-1.6 1.5-1.6h14.7z"></path><path fill="#0E73B9" d="M-5.7 25c-1.3 0-2.9 1.1-3.2 2.3l-4.4 19.4c-.3 1.3.5 2.3 1.8 2.3H-26h.5c-1.3 0-2.1-1-1.8-2.3l4.4-19.4c.3-1.3 1.9-2.3 3.2-2.3h14z"></path><path fill="#059DA4" d="M2 26.6v21c0 .8-.6 1.4-1.5 1.4h-12.1c-1.3 0-2.1-1.1-1.8-2.3l4.5-19.4C-8.6 26-7 25-5.7 25H.5c.9 0 1.5.7 1.5 1.6z"></path><path fill="#fff" d="M-21.122 38.645h.14c.14 0 .28-.07.28-.14l.42-.63h1.19l-.21.35h1.4l-.21.63h-1.68c-.21.28-.42.42-.7.42h-.84l.21-.63m-.21.91h3.01l-.21.7h-1.19l-.21.7h1.19l-.21.7h-1.19l-.28 1.05c-.07.14 0 .28.28.21h.98l-.21.7h-1.89c-.35 0-.49-.21-.35-.63l.35-1.33h-.77l.21-.7h.77l.21-.7h-.7l.21-.7zm4.83-1.75v.42s.56-.42 1.12-.42h1.96l-.77 2.66c-.07.28-.35.49-.77.49h-2.24l-.49 1.89c0 .07 0 .14.14.14h.42l-.14.56h-1.12c-.42 0-.56-.14-.49-.35l1.47-5.39h.91zm1.68.77h-1.75l-.21.7s.28-.21.77-.21h1.05l.14-.49zm-.63 1.68c.14 0 .21 0 .21-.14l.14-.35h-1.75l-.14.56 1.54-.07zm-1.19.84h.98v.42h.28c.14 0 .21-.07.21-.14l.07-.28h.84l-.14.49c-.07.35-.35.49-.77.56h-.56v.77c0 .14.07.21.35.21h.49l-.14.56h-1.19c-.35 0-.49-.14-.49-.49l.07-2.1zm4.2-2.45l.21-.84h1.19l-.07.28s.56-.28 1.05-.28h1.47l-.21.84h-.21l-1.12 3.85h.21l-.21.77h-.21l-.07.35h-1.19l.07-.35h-2.17l.21-.77h.21l1.12-3.85h-.28m1.26 0l-.28 1.05s.49-.21.91-.28c.07-.35.21-.77.21-.77h-.84zm-.49 1.54l-.28 1.12s.56-.28.98-.28c.14-.42.21-.77.21-.77l-.91-.07zm.21 2.31l.21-.77h-.84l-.21.77h.84zm2.87-4.69h1.12l.07.42c0 .07.07.14.21.14h.21l-.21.7h-.77c-.28 0-.49-.07-.49-.35l-.14-.91zm-.35 1.47h3.57l-.21.77h-1.19l-.21.7h1.12l-.21.77h-1.26l-.28.42h.63l.14.84c0 .07.07.14.21.14h.21l-.21.7h-.7c-.35 0-.56-.07-.56-.35l-.14-.77-.56.84c-.14.21-.35.35-.63.35h-1.05l.21-.7h.35c.14 0 .21-.07.35-.21l.84-1.26h-1.05l.21-.77h1.19l.21-.7h-1.19l.21-.77zm-19.74-5.04c-.14.7-.42 1.19-.91 1.54-.49.35-1.12.56-1.89.56-.7 0-1.26-.21-1.54-.56-.21-.28-.35-.56-.35-.98 0-.14 0-.35.07-.56l.84-3.92h1.19l-.77 3.92v.28c0 .21.07.35.14.49.14.21.35.28.7.28s.7-.07.91-.28c.21-.21.42-.42.49-.77l.77-3.92h1.19l-.84 3.92m1.12-1.54h.84l-.07.49.14-.14c.28-.28.63-.42 1.05-.42.35 0 .63.14.77.35.14.21.21.49.14.91l-.49 2.38h-.91l.42-2.17c.07-.28.07-.49 0-.56-.07-.14-.21-.14-.35-.14-.21 0-.42.07-.56.21-.14.14-.28.35-.28.63l-.42 2.03h-.91l.63-3.57m9.8 0h.84l-.07.49.14-.14c.28-.28.63-.42 1.05-.42.35 0 .63.14.77.35s.21.49.14.91l-.49 2.38h-.91l.42-2.24c.07-.21 0-.42-.07-.49-.07-.14-.21-.14-.35-.14-.21 0-.42.07-.56.21-.14.14-.28.35-.28.63l-.42 2.03h-.91l.7-3.57m-5.81 0h.98l-.77 3.5h-.98l.77-3.5m.35-1.33h.98l-.21.84h-.98l.21-.84zm1.4 4.55c-.21-.21-.35-.56-.35-.98v-.21c0-.07 0-.21.07-.28.14-.56.35-1.05.7-1.33.35-.35.84-.49 1.33-.49.42 0 .77.14 1.05.35.21.21.35.56.35.98v.21c0 .07 0 .21-.07.28-.14.56-.35.98-.7 1.33-.35.35-.84.49-1.33.49-.35 0-.7-.14-1.05-.35m1.89-.7c.14-.21.28-.49.35-.84v-.35c0-.21-.07-.35-.14-.49a.635.635 0 0 0-.49-.21c-.28 0-.49.07-.63.28-.14.21-.28.49-.35.84v.28c0 .21.07.35.14.49.14.14.28.21.49.21.28.07.42 0 .63-.21m6.51-4.69h2.52c.49 0 .84.14 1.12.35.28.21.35.56.35.91v.28c0 .07 0 .21-.07.28-.07.49-.35.98-.7 1.26-.42.35-.84.49-1.4.49h-1.4l-.42 2.03h-1.19l1.19-5.6m.56 2.59h1.12c.28 0 .49-.07.7-.21.14-.14.28-.35.35-.63v-.28c0-.21-.07-.35-.21-.42-.14-.07-.35-.14-.7-.14h-.91l-.35 1.68zm8.68 3.71c-.35.77-.7 1.26-.91 1.47-.21.21-.63.7-1.61.7l.07-.63c.84-.28 1.26-1.4 1.54-1.96l-.28-3.78h1.19l.07 2.38.91-2.31h1.05l-2.03 4.13m-2.94-3.85l-.42.28c-.42-.35-.84-.56-1.54-.21-.98.49-1.89 4.13.91 2.94l.14.21h1.12l.7-3.29-.91.07m-.56 1.82c-.21.56-.56.84-.91.77-.28-.14-.35-.63-.21-1.19.21-.56.56-.84.91-.77.28.14.35.63.21 1.19"></path></svg>
+            </li><li class="icon--payment">
+              <svg viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"></path></svg>
+            </li></ul>
+        </div>
+         <div class="footer-pagos">
+             <img src="compra2.png">
+        </div>
+    </div>
+              </form>
+        </div>
+</section>
+     
+    
+<div class="reviews-section">
+    <h1>Reseñas de i-Clothes</h1>
+    <div class="review-container">
+        <div class="review">
+            <p>¡👕💎 Increíble experiencia con i-Clothes! La tienda es genial y las prendas son asombrosas. ¡Más de lo que esperaba! 😍🛍️</p>
+        </div>
+        <div class="review">
+            <p>Recomiendo encarecidamente i-Clothes. 👚👖 Tuve un tiempo fantástico explorando su colección. ¡Encontré las mejores piezas! 😊👌</p>
+        </div>
+        <div class="review">
+            <p>Una forma emocionante de descubrir moda urbana y luxury. Cada prenda es única y llena de estilo. 💃🕺 ¡Me encantó cada minuto de compras en i-Clothes! 💖🛒</p>
+        </div>
+        <div class="review">
+            <p>Las colecciones de i-Clothes son una excelente manera de conocer las últimas tendencias en moda urbana y luxury. 👠👜 Siempre me mantienen a la moda. 💁‍♀️💅</p>
+        </div>
+        <div class="review">
+            <p>Had an amazing time with i-Clothes! The store is great and the clothing is breathtaking. 👗🌟 A must-visit for fashion lovers! 👏💃</p>
+        </div>
+        <div class="review">
+            <p>Highly recommend i-Clothes. 👔👟 I had a fantastic time exploring their collection. 🌆👜 They have the best urban and luxury pieces! 👍😃</p>
+        </div>
+        <div class="review">
+            <p>An exciting way to discover urban and luxury fashion. Each piece is unique and full of style. 👕👖✨ i-Clothes always has the latest trends! 💃🔥</p>
+        </div>
+        <div class="review">
+            <p>i-Clothes' collections are an excellent way to stay updated with the latest trends in urban and luxury fashion. 🕶️📸 I'm always fashion-forward with i-Clothes! 💁‍♂️👌</p>
+        </div>
+        <div class="review">
+            <p>¡👖🌟 Increíble experiencia con i-Clothes! La tienda es genial y las prendas son asombrosas. ¡Más de lo que esperaba! 😍🛍️</p>
+        </div>
+        <div class="review">
+            <p>¡👕💎 Brutal la página y el servicio post venta muy atento</p>
+        </div>
+        <div class="review">
+            <p>¡👚💖 una página que da mucha seguridad y su soporte es increíble</p>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+// Función para actualizar el precio subtotal y el envío
+function actualizarPrecioSubtotal() {
+  // Selecciona todos los elementos con la clase "producto"
+  const productos = document.querySelectorAll('.producto');
+  
+  // Inicializa las variables para el subtotal y la cantidad total de productos
+  let subtotal = 0;
+  let cantidadTotalProductos = 0;
+
+  // Recorre todos los productos
+  productos.forEach((producto) => {
+    // Busca el elemento que contiene el precio del producto
+    const precioTexto = producto.querySelector('.precio');
+
+    // Obtener la cantidad del producto (si no se encuentra el span, se toma como 1)
+    const cantidadProductoElemento = producto.querySelector('.imagenResumen span');
+    const cantidadProducto = cantidadProductoElemento ? parseInt(cantidadProductoElemento.textContent) : 1;
+
+    // Verifica si se encontró el precio y si la cantidad es un número válido
+    if (precioTexto && !isNaN(cantidadProducto)) {
+      // Convierte el precio a número y elimina el formato de moneda
+      const precio = parseFloat(precioTexto.textContent.replace('€', '').replace(',', '.'));
+
+      // Calcula el subtotal para este producto
+      subtotal += precio * cantidadProducto;
+
+      // Suma la cantidad de este producto a la cantidad total de productos
+      cantidadTotalProductos += cantidadProducto;
+    }
+  });
+
+  // Actualizar elementos .subtotal-amount
+  const subtotalElementos = document.querySelectorAll('.subtotal-amount');
+  if (subtotalElementos) {
+    subtotalElementos.forEach((subtotalElemento) => {
+      subtotalElemento.textContent = subtotal.toFixed(2) + '€';
+    });
+  }
+
+  // Verificar si el total supera los 50€ y mostrar "Envío gratis" o "7,50€"
+  const envio = document.querySelector('.envio');
+  if (envio) {
+    if (subtotal > 50) {
+      envio.textContent = 'Gratis';
+    } else {
+      envio.textContent = '7,50€';
+    }
+  }
+
+  // Actualizar la cantidad total de productos en el resumen
+  const cantidadProductosElemento = document.querySelector('.encabezado span');
+  if (cantidadProductosElemento) {
+    cantidadProductosElemento.textContent = cantidadTotalProductos;
+  }
+
+  // Llama a la función para calcular el total
+  calcularTotal();
+}
+
+// Observador de mutaciones y llamada inicial
+const targetNode = document.querySelector('.box-contenido');
+const config = { childList: true, subtree: true };
+
+const callback = function (mutationsList, observer) {
+  for (const mutation of mutationsList) {
+    if (mutation.type === 'childList') {
+      // Se ha producido un cambio en el contenido de .box-contenido
+      actualizarPrecioSubtotal();
+    }
+  }
+};
+
+// Crea un observador de mutaciones y lo aplica al elemento .box-contenido
+const observer = new MutationObserver(callback);
+observer.observe(targetNode, config);
+
+
+
+// CALCULO TOTAL
+
+// Función para calcular el total
+function calcularTotal() {
+  const subtotalAmount = parseFloat(document.querySelector('.subtotal-amount').textContent.replace('€', ''));
+  const envio = document.querySelector('.envio').textContent.trim();
+
+  let total;
+
+  if (envio === 'Gratis') {
+    total = subtotalAmount + 0;
+  } else {
+    total = subtotalAmount + parseFloat(envio.replace('€', '').replace(',', '.'));
+  }
+
+  // Actualiza el contenido de la clase .total con el nuevo valor calculado
+  document.querySelector('.total').textContent = total.toFixed(2) + '€';
+}
+
+// Observador de mutaciones para la clase .total
+const totalElement = document.querySelector('.total');
+const totalObserver = new MutationObserver(() => {
+  // Cuando cambia el contenido de .total, vuelve a calcular el total
+  calcularTotal();
+});
+
+// Configuración del observador
+const totalConfig = { childList: true, subtree: true };
+
+// Observa cambios en la clase .total
+totalObserver.observe(totalElement, totalConfig);
+
+// Llama a la función para calcular el total inicial
+calcularTotal();
+        
+
+// INCADOR DE ESTADO DEL PROCESO - BORDE NARANJA
+
+// Supongamos que tienes una función para cambiar el estilo basado en las condiciones
+function actualizarEstilo() {
+  var info = document.getElementById('info');
+  var mejoraPedido = document.getElementById('mejoraPedido');
+  var stripe = document.getElementById('stripe');
+
+  // Verifica el estado de visualización y actualiza las clases según corresponda
+  if (info.style.display === 'block') {
+    info.classList.add('active');
+  } else {
+    info.classList.remove('active');
+  }
+
+  if (mejoraPedido.style.display === 'block') {
+    mejoraPedido.classList.add('active');
+  } else {
+    mejoraPedido.classList.remove('active');
+  }
+
+  if (stripe.style.display === 'block') {
+    stripe.classList.add('active');
+  } else {
+    stripe.classList.remove('active');
+  }
+}
+
+// Llama a la función para actualizar el estilo en respuesta a cambios en el estado de visualización
+actualizarEstilo();
+
+
+
+
+        
+
+
+
+//DATOS CESTA DESPLEGABLE
+
+    // Obtén el JSON del Local Storage
+const carritoJSON = localStorage.getItem('carrito');
+
+// Verifica si hay datos en el Local Storage
+if (carritoJSON) {
+  // Parsea el JSON a un objeto JavaScript
+  const carrito = JSON.parse(carritoJSON);
+
+  // Obtén el contenedor de productos
+  const contenedorProductos = document.querySelector('.contenedor-productos');
+
+  // Itera sobre los productos en el carrito
+  carrito.forEach(producto => {
+    // Crea un elemento de producto
+    const productoElemento = document.createElement('div');
+    productoElemento.classList.add('producto');
+    productoElemento.dataset.id = producto.id; // Añade el atributo data-id
+    productoElemento.dataset.seccion = producto.seccion; // Añade el atributo data-seccion
+    productoElemento.dataset.categoria = producto.categoria; // Añade el atributo data-categoria
+
+    // Crea el elemento de imagen y cantidad
+    const imagenResumen = document.createElement('div');
+    imagenResumen.classList.add('imagenResumen');
+
+    const imagen = document.createElement('img');
+    imagen.src = producto.imagen;
+
+    const cantidad = document.createElement('span');
+    cantidad.textContent = producto.cantidad;
+
+    imagenResumen.appendChild(imagen);
+    imagenResumen.appendChild(cantidad);
+
+    // Crea el elemento de nombre y precio
+    const nombreProducto = document.createElement('p');
+    nombreProducto.classList.add('nombreproducto');
+    nombreProducto.textContent = producto.nombre;
+
+    const precio = document.createElement('p');
+    precio.classList.add('precio');
+    precio.textContent = producto.precio;
+
+    // Crea el elemento de talla
+    const talla = document.createElement('p');
+    talla.classList.add('talla');
+    talla.textContent = producto.talla;
+
+    // Agrega los elementos al producto
+    productoElemento.appendChild(imagenResumen);
+    productoElemento.appendChild(nombreProducto);
+    productoElemento.appendChild(talla); // Agrega el elemento de talla
+    productoElemento.appendChild(precio);
+
+
+    // Agrega el producto al contenedor de productos
+    contenedorProductos.appendChild(productoElemento);
+  });
+}
+
+// AÑADIR UPSELL AL CARRITO
+
+ // Espera a que se cargue completamente el DOM antes de ejecutar el código
+document.addEventListener('DOMContentLoaded', function() {
+  // Obtén todos los elementos con la clase "reserva-option"
+  const reservaOptions = document.querySelectorAll('.reserva-options .reserva-option');
+
+  // Define una función para manejar el clic en cada elemento individual
+  function handleClick(event) {
+    // Verifica si el elemento ya ha sido procesado
+    if (event.currentTarget.hasAttribute('data-procesado')) {
+      return; // Si ya ha sido procesado, no hagas nada
+    }
+
+    // Establece el borde naranja al elemento clicado
+    event.currentTarget.style.border = '2px solid orange';
+
+    // Cambia el texto de "detalle-oferta" a "¡Añadido!" y cambia el color a naranja
+    const detalleOferta = event.currentTarget.querySelector('.precioAnterior');
+    detalleOferta.textContent = '¡Añadido!';
+    detalleOferta.style.color = 'orange';
+
+    // Captura la información relevante del elemento clicado
+    const h3Text = event.currentTarget.querySelector('h3').textContent;
+    const ofertaPrice = event.currentTarget.querySelector('.oferta2').textContent;
+    const imageSrc = event.currentTarget.querySelector('img').src;
+
+    // Crea un nuevo elemento HTML
+    const nuevoProducto = document.createElement('div');
+    nuevoProducto.classList.add('producto');
+    nuevoProducto.setAttribute('data-categoria', 'oferta');
+
+    const imagenResumen = document.createElement('div');
+    imagenResumen.classList.add('imagenResumen');
+    const imagen = document.createElement('img');
+    imagen.src = imageSrc;
+    imagenResumen.appendChild(imagen);
+
+    const nombreProducto = document.createElement('p');
+    nombreProducto.classList.add('nombreproducto');
+    nombreProducto.textContent = h3Text;
+
+    const ofertaTag = document.createElement('p');
+    ofertaTag.classList.add('oferta');
+    ofertaTag.textContent = 'oferta';
+
+    const precio = document.createElement('p');
+    precio.classList.add('precio');
+    precio.textContent = ofertaPrice;
+
+    // Agrega los elementos al nuevo producto
+    nuevoProducto.appendChild(imagenResumen);
+    nuevoProducto.appendChild(nombreProducto);
+    nuevoProducto.appendChild(ofertaTag);
+    nuevoProducto.appendChild(precio);
+
+    // Encuentra el elemento .contenedor-productos
+    const contenedorProductos = document.querySelector('.contenedor-productos');
+
+    // Agrega el nuevo producto después del último hijo en .contenedor-productos
+    contenedorProductos.appendChild(nuevoProducto);
+
+    // Marca el elemento como procesado para que no se vuelva a procesar
+    event.currentTarget.setAttribute('data-procesado', 'true');
+  }
+
+  // Agrega un controlador de eventos clic a cada elemento
+  reservaOptions.forEach((opcion) => {
+    opcion.addEventListener('click', handleClick);
+  });
+});
+
+
+// CAJA REGALO
+
+// Obtén el elemento input
+const inputCheckbox = document.querySelector('.upsell input');
+
+// Obtén el contenedor de productos
+const contenedorProductos = document.querySelector('.contenedor-productos');
+
+
+
+
+// Agrega un controlador de eventos al input
+inputCheckbox.addEventListener('change', function () {
+  // Verifica si el input está marcado
+  if (this.checked) {
+    // Crea un nuevo elemento .producto
+    const productoElemento = document.createElement('div');
+    productoElemento.classList.add('producto');
+    productoElemento.dataset.categoria = 'cajaregalo';
+
+    // Crea los elementos de nombre y precio
+    const nombreProducto = document.createElement('p');
+    nombreProducto.classList.add('nombreproducto');
+    nombreProducto.textContent = 'Kit Regalo';
+
+    const precio = document.createElement('p');
+    precio.classList.add('precio');
+    precio.textContent = '10€';
+
+    // Agrega los elementos al producto
+    productoElemento.appendChild(nombreProducto);
+    productoElemento.appendChild(precio);
+
+    // Agrega el producto al final de .contenedor-productos
+    contenedorProductos.appendChild(productoElemento);
+     
+  } else {
+    // Busca y elimina el producto con data-categoria="cajaregalo"
+    const productosCajaRegalo = document.querySelectorAll('.producto[data-categoria="cajaregalo"]');
+    productosCajaRegalo.forEach((producto) => {
+      contenedorProductos.removeChild(producto);
+    });
+
+     
+  }
+});
+
+
+
+        // STORIES
+
+
+        const storyBubbles = document.querySelectorAll(".story-bubble");
+        const expandedStory = document.querySelector(".expanded-story");
+        const expandedImg = expandedStory.querySelector("img");
+       
+
+        storyBubbles.forEach((bubble) => {
+            bubble.addEventListener("click", () => {
+                expandedImg.src = bubble.dataset.image;
+                expandedStory.style.display = "flex";
+                setTimeout(() => {
+                    expandedStory.style.display = "none";
+                }, 5000);
+            });
+        });
+
+
+
+       
+
+
+// UPSELLS
+
+// Recupera los datos del localStorage
+const reservaData = JSON.parse(localStorage.getItem('carrito'));
+
+// Verifica si hay datos en el JSON
+if (reservaData && reservaData.length > 0) {
+  const reservaContainers = document.querySelectorAll('.reserva-container');
+
+  // Itera sobre los contenedores con la clase .reserva-container
+  reservaContainers.forEach((container) => {
+    // Itera sobre los datos y crea elementos HTML para cada elemento en el JSON
+    reservaData.forEach((item) => {
+      const reservaOption = document.createElement('div');
+      reservaOption.classList.add('reserva-option');
+
+      const nombreElement = document.createElement('h3');
+      nombreElement.textContent = item.nombre;
+
+      const precioAnteriorElement = document.createElement('p');
+      precioAnteriorElement.classList.add('precioAnterior');
+      precioAnteriorElement.textContent = 'Precio Anterior ';
+
+      const precioElement = document.createElement('span');
+      precioElement.classList.add('precio');
+      precioElement.textContent = item.precio;
+
+      const imagenElement = document.createElement('img');
+      imagenElement.setAttribute('src', item.imagen); // Agrega la URL de la imagen desde los datos de reserva
+      imagenElement.style.width = '50px';
+
+      const detalleOfertaElement = document.createElement('p');
+      detalleOfertaElement.classList.add('detalle-oferta');
+
+      // Calcular el precio de la oferta (20% de descuento)
+      const precioOferta = (parseFloat(item.precio.replace('€', '')) * 0.8).toFixed(2);
+
+      const oferta2Element = document.createElement('span');
+      oferta2Element.classList.add('oferta2');
+      oferta2Element.style.color = 'rgb(102, 205, 84)';
+      oferta2Element.textContent = precioOferta + '€';
+
+      detalleOfertaElement.innerHTML = 'Añade otra por ';
+      detalleOfertaElement.appendChild(oferta2Element);
+
+      reservaOption.appendChild(nombreElement);
+      reservaOption.appendChild(precioAnteriorElement);
+      precioAnteriorElement.appendChild(precioElement);
+      reservaOption.appendChild(imagenElement);
+      reservaOption.appendChild(detalleOfertaElement);
+
+      container.appendChild(reservaOption);
+    });
+  });
+} else {
+  // Manejar el caso en el que no hay datos en el localStorage
+  console.log('No hay datos en el localStorage');
+}
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const encabezado = document.querySelector('.encabezado');
+  const contenido = document.querySelector('.box-contenido');
+  const flecha = document.querySelector('.fa-arrow-down');
+
+  // Por defecto, el contenido está oculto
+  let desplegado = false;
+
+  encabezado.addEventListener('click', function () {
+    if (desplegado) {
+      contenido.style.display = 'none';
+      flecha.classList.remove('fa-arrow-up');
+      flecha.classList.add('fa-arrow-down');
+    } else {
+      contenido.style.display = 'block';
+      flecha.classList.remove('fa-arrow-down');
+      flecha.classList.add('fa-arrow-up');
+    }
+
+    // Cambiar el estado del desplegable
+    desplegado = !desplegado;
+  });
+});
+
+
+
+// Obtiene referencias a los elementos del DOM
+const infoForm = document.getElementById('info-form');
+const mejoraPedido = document.getElementById('mejoraPedido');
+const stripe2 = document.getElementById('stripe');
+const continuar2Button = document.getElementById('continuar2');
+
+// Agrega un event listener para el envío del formulario
+infoForm.addEventListener('submit', function (event) {
+  // Evita el envío del formulario predeterminado
+  event.preventDefault();
+
+  // Oculta el formulario de información
+  document.getElementById('info').style.display = 'none';
+
+  // Muestra la sección "mejoraPedido"
+  mejoraPedido.style.display = 'block';
+    mejoraPedido.scrollIntoView({
+    behavior: 'smooth', // Esto crea un desplazamiento suave
+    block: 'start' // Esto alinea la parte superior de la sección en la parte superior de la ventana
+  });
+});
+
+// Agrega un event listener para el clic en "Continuar2"
+continuar2Button.addEventListener('click', function () {
+  // Oculta la sección "mejoraPedido"
+  mejoraPedido.style.display = 'none';
+
+  // Muestra la sección "stripe"
+  stripe2.style.display = 'block';
+stripe2.scrollIntoView({
+    behavior: 'smooth', // Esto crea un desplazamiento suave
+    block: 'start' // Esto alinea la parte superior de la sección en la parte superior de la ventana
+  });
+});
+
+
+
+// Configura tu clave pública de Stripe (reemplaza con tu clave real)
+const stripePublicKey = 'pk_live_51M9S5DBElJap7B2LOqO3gSkKbkgH0Lo0hez20vDWcpoL8IqqXhzvKXkbe3o5co1F9NR4c3ZrprPysIED3qMRNPvM009v0emWMC';
+const stripe = Stripe(stripePublicKey);
+
+// Inicializa el formulario de Stripe Elements
+const elements = stripe.elements();
+const cardElement = elements.create('card');
+
+// Monta el elemento de tarjeta en el DOM
+cardElement.mount('#card-element');
+
+// Maneja el envío del formulario
+const form = document.getElementById('payment-form');
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  // Deshabilita el botón de pago durante el proceso
+  document.getElementById('submit-button').disabled = true;
+
+  // Crea un cliente de pago de Stripe
+  const { token, error } = await stripe.createToken(cardElement);
+
+  // Maneja errores
+  if (error) {
+    // Muestra un mensaje de error al usuario
+    const errorElement = document.getElementById('payment-error');
+    errorElement.textContent = error.message;
+    errorElement.style.display = 'block';
+
+    // Habilita el botón de pago nuevamente
+    document.getElementById('submit-button').disabled = false;
+  } else {
+    // Obtén el valor total sin el símbolo "€"
+    const total = document.querySelector('.total').textContent;
+
+    // Crear un objeto con el detalle del pedido
+    const pedido = {
+      total: total,
+    };
+
+    // Combinar el objeto pedido y el token en un solo objeto
+    const datosParaEnviar = {
+      pedido: pedido,
+      token: token.id
+    };
+
+ // Realizar la solicitud POST al servidor
+fetch('https://ahorrodirect.com/stripe/cargo.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(datosParaEnviar),
+})
+.then((response) => response.json())
+.then((data) => {
+    const successElement = document.getElementById('payment-result');
+    const errorElement = document.getElementById('payment-error');
+    const submitButton = document.getElementById('submit-button');
+
+    if (data.success) {
+        // Si la respuesta es true, muestra un mensaje de éxito y habilita el botón de pago
+        successElement.style.display = 'block';
+        errorElement.style.display = 'none'; // Oculta el mensaje de error si estaba visible
+
+        // Habilita el botón de pago nuevamente
+        submitButton.disabled = false;
+    } else {
+        errorElement.style.display = 'block';
+        successElement.style.display = 'none';
+
+        // Habilita el botón de pago nuevamente
+        submitButton.disabled = false;
+    }
+});
+
+  }
+});
+
+
+
+
+
+
+</script>
+    <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:3667447,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '286003807331638');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=286003807331638&ev=PageView&noscript=1"
+/></noscript>
+</body>
+</html>
