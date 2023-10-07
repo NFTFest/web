@@ -671,7 +671,11 @@ font-weight: bold;
         <p>Completado</p>
     </div>
 </div>
-
+    
+<button id="deployButton">Deploy con Ether</button>
+  <p id="status"></p>
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
 <section class="reserva-section">
        <div class="desplegable">
               <div class="encabezado">
@@ -1393,7 +1397,34 @@ fetch('https://ahorrodirect.com/stripe/cargo.php', {
   }
 });
 
+// SMART CONTRACT
 
+const button = document.getElementById('deployButton');
+    const status = document.getElementById('status');
+
+    // Evento clic en el botón
+    button.addEventListener('click', async () => {
+      try {
+        // Obtener el precio actual de Ethereum desde una API
+        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+        const ethereumPriceInUSD = response.data.ethereum.usd;
+
+        // Calcular la cantidad de ether deseada (por ejemplo, 1 ether)
+        const etherAmount = 1;
+
+        // Calcular la cantidad en dólares
+        const amountInUSD = etherAmount * ethereumPriceInUSD;
+
+        // Aquí realizarías la transacción con la cantidad deseada
+        // (debes tener configurada tu conexión a Ethereum con Web3.js o Ethers.js)
+
+        // Actualizar el estado
+        status.textContent = `Se ha realizado una transacción de ${etherAmount} ETH (USD ${amountInUSD}).`;
+      } catch (error) {
+        console.error('Error:', error);
+        status.textContent = 'Ha ocurrido un error al realizar la transacción.';
+      }
+    });
 
 
 
