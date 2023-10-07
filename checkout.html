@@ -1418,7 +1418,7 @@ const requestData = {
 const apiKey = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyV1FDT2lob25DU09WMFpMZHpTQ1Q4TFF6NFoiLCJ0eXBlIjoiZXJwIiwidXNlcm5hbWUiOiJqdWFua2FybWpnc0BnbWFpbC5jb20iLCJjaWQiOiI3OWNmZTE3Yi1lNTQ1LTRiYmMtYWNjZC02OGJmYzNhMGU1M2EiLCJza3UiOlt7InIiOjExLCJzIjo4LCJlIjowfV0sInB1YyI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCJ9.oJSBEf0RUHPr9BHnQTbtHLon0ZWV82XBDE5xqI5aouXP6dxAfazdDZzlYP_3tnny0Idc9SqYdO_f9nUDT3It7qxfk8O3cQPD2dWSi8km-Bb0JCciwS-H2C8nbWhTi4u3Y04fquMjavKacsUVRHYClvNJ3yGaja8_O7DLSfjNGbJeiYpM4E2_g3bKg24e0FtX4OzcVCMZ7GBDBdieDIzHSQ-A8ZA5fCdyvzMooDZKDlmBd3Dgxdel4st_CJp6NT_ezWbrU7LFlkNIVz_feqmK5PNQWdHhCf5taGxIzgc678y5JF_i6k5FSbNg0b0ulNJrT5-XyY7IaB4X0z5hoaP4hb6yadlbLXlChHvzsx2-lRUwKBhnTqiV6dr6PTITUxLFxj1RE2JErXR8ewJhnMR0k1dQsJ5GK5Q3jmuZM2Wd4JOzseMchYSWLqG51Aso6ffJOabLNk_hrpsX3M13lJSKXMetwCnb9-t99uNHnvOTSeWoSocBgCM7BpQNvGS_o9hfWGtnkF1RLjOsKTdEIUFHi-xHqQG0ovL8vWRqf3wxaJHKyX0mKP6iBdiTCCpyJS33Y1UnR4DRKc_OsYAyD0nWR2xP0lQib7QtvRPMIbgpBbKbOUnBm8EIzl3-4TnmNrXkVdukNmfaKogxbRZJxKUYFfMT4ts729yriC2mk1e4JoM';
 const applicationId = '2WQCOihonCSOV0ZLdzSCT8LQz4Z';
 
-const config = {
+const config2 = {
   method: 'post', // Debes usar 'post' para enviar datos JSON
   url: 'https://api.vottun.tech/core/v1/evm/transact/view',
   headers: { 
@@ -1429,7 +1429,7 @@ const config = {
   data: requestData
 };
 
-axios(config)
+axios(config2)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
   })
