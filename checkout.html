@@ -1399,32 +1399,43 @@ fetch('https://ahorrodirect.com/stripe/cargo.php', {
 
 // SMART CONTRACT
 
-const button = document.getElementById('deployButton');
-    const status = document.getElementById('status');
+const axios = require('axios');
 
-    // Evento clic en el botón
-    button.addEventListener('click', async () => {
-      try {
-        // Obtener el precio actual de Ethereum desde una API
-        const response = await axios.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-        const ethereumPriceInUSD = response.data.ethereum.usd;
+const contractAddress = "0xa0b86991c621..BA20e5A3Aa0C"; // Dirección del contrato inteligente
+const blockchainNetwork = 97; // Número de red de Ethereum (por ejemplo, 97 para Binance Smart Chain)
+const method = "balanceOf"; // Método que deseas llamar en el contrato
+const params = [
+  "0xC02A3F525f2..597B2ffcaE633a" // Parámetros para el método (por ejemplo, dirección Ethereum)
+];
 
-        // Calcular la cantidad de ether deseada (por ejemplo, 1 ether)
-        const etherAmount = 1;
+const requestData = {
+  contractAddress,
+  blockchainNetwork,
+  method,
+  params
+};
 
-        // Calcular la cantidad en dólares
-        const amountInUSD = etherAmount * ethereumPriceInUSD;
+const apiKey = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIyV1FDT2lob25DU09WMFpMZHpTQ1Q4TFF6NFoiLCJ0eXBlIjoiZXJwIiwidXNlcm5hbWUiOiJqdWFua2FybWpnc0BnbWFpbC5jb20iLCJjaWQiOiI3OWNmZTE3Yi1lNTQ1LTRiYmMtYWNjZC02OGJmYzNhMGU1M2EiLCJza3UiOlt7InIiOjExLCJzIjo4LCJlIjowfV0sInB1YyI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCJ9.oJSBEf0RUHPr9BHnQTbtHLon0ZWV82XBDE5xqI5aouXP6dxAfazdDZzlYP_3tnny0Idc9SqYdO_f9nUDT3It7qxfk8O3cQPD2dWSi8km-Bb0JCciwS-H2C8nbWhTi4u3Y04fquMjavKacsUVRHYClvNJ3yGaja8_O7DLSfjNGbJeiYpM4E2_g3bKg24e0FtX4OzcVCMZ7GBDBdieDIzHSQ-A8ZA5fCdyvzMooDZKDlmBd3Dgxdel4st_CJp6NT_ezWbrU7LFlkNIVz_feqmK5PNQWdHhCf5taGxIzgc678y5JF_i6k5FSbNg0b0ulNJrT5-XyY7IaB4X0z5hoaP4hb6yadlbLXlChHvzsx2-lRUwKBhnTqiV6dr6PTITUxLFxj1RE2JErXR8ewJhnMR0k1dQsJ5GK5Q3jmuZM2Wd4JOzseMchYSWLqG51Aso6ffJOabLNk_hrpsX3M13lJSKXMetwCnb9-t99uNHnvOTSeWoSocBgCM7BpQNvGS_o9hfWGtnkF1RLjOsKTdEIUFHi-xHqQG0ovL8vWRqf3wxaJHKyX0mKP6iBdiTCCpyJS33Y1UnR4DRKc_OsYAyD0nWR2xP0lQib7QtvRPMIbgpBbKbOUnBm8EIzl3-4TnmNrXkVdukNmfaKogxbRZJxKUYFfMT4ts729yriC2mk1e4JoM';
+const applicationId = '2WQCOihonCSOV0ZLdzSCT8LQz4Z';
 
-        // Aquí realizarías la transacción con la cantidad deseada
-        // (debes tener configurada tu conexión a Ethereum con Web3.js o Ethers.js)
+const config = {
+  method: 'post', // Debes usar 'post' para enviar datos JSON
+  url: 'https://api.vottun.tech/core/v1/evm/transact/view',
+  headers: { 
+    'Authorization': `Bearer ${apiKey}`,
+    'x-application-vkn': applicationId,
+    'Content-Type': 'application/json'
+  },
+  data: requestData
+};
 
-        // Actualizar el estado
-        status.textContent = `Se ha realizado una transacción de ${etherAmount} ETH (USD ${amountInUSD}).`;
-      } catch (error) {
-        console.error('Error:', error);
-        status.textContent = 'Ha ocurrido un error al realizar la transacción.';
-      }
-    });
+axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
 
 
 
